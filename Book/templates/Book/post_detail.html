@@ -1,0 +1,68 @@
+{% extends "Book/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'Book/css/book-detail.css' %}?{% now "U" %}">
+{% endblock %}
+{% block content %}
+    
+    <div class="container topevery">
+        <div class="row">
+            <div class="col-3">
+                <!-- <h1>"{{object.Image.url}}"</h1> -->
+                <img class="bookImg" src="{{object.Image.url}}">
+                <hr class="imginfo">
+                <p>Author: {{ object.Author }}</p>
+                <p>Genre: {{ object.Genre }}</p>
+                <p>Language: English</p>
+                <p>Published in:2008</p>
+                <p>Uploaded on: 23/3/2022</p>
+                <button class="btn btn-success">Upvote</button>
+                <button class="btn btn-danger">Devote</button>
+
+            </div>
+            <div class = "vertical"></div>
+            <div class="col-9">
+                <h1 class="bookname">{{ object.Book_name }}</h1>
+                <button class="btn fav"><i class="fas fa-star"></i>Add to Favourites</button>
+                <h4 class="bookname"> Info</h4>
+                <p class="bookname">{{ object.Info }}</p>
+                {% if object.Price == 0 %}
+                <a class="btn btn-warning"href="{{object.File.url}}">Read Online</a>
+                <a class="btn btn-info"href="{{object.File.url}}" download="{{object.File.url}}">Download Pdf</a>
+                {% else %}
+                <a class="btn btn-success"href="#">Buy Soft Copy</a>
+                <p>$ {{object.Price}}</p>
+                {% endif %}
+                
+                <a class="btn btn-danger"href="#">Buy Hard Copy</a>
+            </div>
+            <!-- <div class="col-9">
+                <h1 class="bookname">Hunger Games</h1>
+            </div> -->
+        </div>
+    </div>
+   {% endblock %}
+   
+   {% block js %}
+   <script>
+    'use strict';
+    
+    const favbtn=document.querySelector('.fav');
+    
+    favbtn.addEventListener('click',function(){
+        console.log(getComputedStyle(favbtn).backgroundColor);
+        if(getComputedStyle(favbtn).backgroundColor==="rgb(0, 128, 0)"){
+            console.log('llk')
+            favbtn.style.backgroundColor='red';
+        }
+        else if(getComputedStyle(favbtn).backgroundColor==='rgb(255, 0, 0)'){
+            favbtn.style.backgroundColor='green';
+        }
+        
+    })
+    </script>
+        <script src="{% static 'Book/js/home.js' %}? {% now "U" %}"></script>
+   {% endblock %}
+<!--     
+</body>
+</html> -->
